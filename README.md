@@ -1,4 +1,4 @@
-# 🫧 bubble-reveal
+# 🫧 Bubbles Rising — Image Reveal Effect
 > Circular image reveal effect built with GSAP - inspired by Codrops Segment Effect
 
 <p align="left">
