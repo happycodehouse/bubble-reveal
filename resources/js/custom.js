@@ -20,10 +20,10 @@ const defaults = {
         translateZ: {min: 10, max: 65},
     },
     zones: [
-        {top: {min: 10, max: 40}, left: {min: 5, max: 45}},
-        {top: {min: 10, max: 40}, left: {min: 55, max: 95}},
-        {top: {min: 60, max: 90}, left: {min: 5, max: 45}},
-        {top: {min: 60, max: 90}, left: {min: 55, max: 95}},
+        { top: { min: 15, max: 40 }, left: { min: 15, max: 40 } },
+        { top: { min: 15, max: 40 }, left: { min: 60, max: 85 } },
+        { top: { min: 60, max: 85 }, left: { min: 15, max: 40 } },
+        { top: { min: 60, max: 85 }, left: { min: 60, max: 85 } },
     ],
 };
 
