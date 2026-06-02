@@ -151,4 +151,6 @@ function initBubbleReveal(el, userOptions) {
     return {animate, reset, changeImg};
 }
 
-initBubbleReveal(document.querySelector(".bubble-reveal"));
+window.addEventListener("load", () => {
+    initBubbleReveal(document.querySelector(".bubble-reveal"));
+});
