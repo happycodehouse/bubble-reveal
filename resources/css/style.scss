@@ -1,38 +1,120 @@
 @charset "UTF-8";
-@use "base/reset" as *;
+@import "base";
+
+.container {
+    position: relative;
+}
 
 .bubble-reveal {
     overflow: hidden;
     position: relative;
     height: 100vh;
-}
 
-.bubble-reveal-bg,
-.bubble-reveal-list,
-.bubble-reveal-item,
-//.segmenter__piece-parallax,
-.bubble-reveal-bubble {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transform-style: preserve-3d;
-}
+    &-bg,
+    &-list {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform-style: preserve-3d;
+    }
 
-.bubble-reveal-bg,
-.bubble-reveal-bubble {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
+    &-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
 
-.bubble-reveal-list {
-    -webkit-perspective: 400px;
-    perspective: 400px;
-}
 
-.bubble-reveal-bg {
-    background-image: url("/resources/images/bg-01.jpg");
-}
+    &-bubble {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        will-change: transform;
+    }
 
+    &-bg,
+    &-bubble {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    &-list {
+        perspective: 400px;
+    }
+
+    &-bubble {
+        will-change: transform;
+    }
+
+    &-shadow {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    &-control {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        padding: var(--page-padding);
+    }
+
+    &-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        button {
+            position: relative;
+            padding: 6px;
+            height: 12px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 3px;
+                height: 100%;
+                background: #ffffff;
+            }
+
+            &.active,
+            &:hover {
+                &::before {
+                    background: oklch(90% 0.2155 150deg);
+                }
+            }
+        }
+    }
+
+    &-nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+
+        button {
+            color: #fff;
+
+            &:hover {
+                text-decoration: underline;
+                color: oklch(90% 0.2155 150deg);
+            }
+        }
+    }
+}

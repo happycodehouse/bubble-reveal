@@ -12,32 +12,47 @@
 </head>
 <body>
 <div class="wrap">
+    <header>
+        <h1>Bubble Reveal</h1>
+        <a href="https://github.com/happycodehouse/bubble-reveal" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <p>Images sourced from <a href="https://unsplash.com/" rel="noopener noreferrer" target="_blank">unsplash.com</a></p>
+    </header>
     <div class="container">
-        <div class="bubble-reveal">
+        <div class="bubble-reveal" data-bubble-reveal="./resources/images/bg-01.jpg">
             <div class="bubble-reveal-bg" data-bubble-reveal-bg=""></div>
             <div class="bubble-reveal-list">
                 <div class="bubble-reveal-item" data-bubble-reveal-item="">
-                    <div class="bubble-reveal-shadow"></div>
                     <div class="bubble-reveal-bubble"></div>
                 </div>
                 <div class="bubble-reveal-item" data-bubble-reveal-item="">
-                    <div class="bubble-reveal-shadow"></div>
                     <div class="bubble-reveal-bubble"></div>
                 </div>
                 <div class="bubble-reveal-item" data-bubble-reveal-item="">
-                    <div class="bubble-reveal-shadow"></div>
                     <div class="bubble-reveal-bubble"></div>
                 </div>
                 <div class="bubble-reveal-item" data-bubble-reveal-item="">
-                    <div class="bubble-reveal-shadow"></div>
+                    <div class="bubble-reveal-bubble"></div>
+                </div>
+                <div class="bubble-reveal-item" data-bubble-reveal-item="">
                     <div class="bubble-reveal-bubble"></div>
                 </div>
             </div>
         </div>
         <div class="bubble-reveal-control">
-
+            <div class="bubble-reveal-dots">
+                <button class="active" type="button" data-bg-img="./resources/images/bg-01.jpg"></button>
+                <button type="button" data-bg-img="./resources/images/bg-02.jpg"></button>
+                <button type="button" data-bg-img="./resources/images/bg-03.jpg"></button>
+                <button type="button" data-bg-img="./resources/images/bg-04.jpg"></button>
+            </div>
+            <div class="bubble-reveal-nav">
+                <button type="button" class="bubble-reveal-prev">prev</button>
+                <button type="button" class="bubble-reveal-next">next</button>
+            </div>
         </div>
     </div>
 </div>
+<script src="./resources/js/lib/gsap.min.js"></script>
+<script src="./resources/js/custom.js"></script>
 </body>
 </html>
