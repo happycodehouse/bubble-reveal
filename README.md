@@ -5,7 +5,7 @@
 <img src="./resources/images/preview.png" alt="Preview Image" width="600">
 </p>
 
-[🔗 Live Demo](#)
+[🔗 Live Demo](https://bubble-reveal.netlify.app/)
 
 ---
 
