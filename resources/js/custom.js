@@ -54,7 +54,6 @@ function initBubbleReveal(el, userOptions) {
             item.dataset.cy = cy;
             item.dataset.r = r;
             item.style.filter = "drop-shadow(0 20px 30px rgba(0,0,0,0.4))";
-            // clip-path 등 초기 상태가 다 세팅된 뒤에만 보이도록 표시
             item.classList.add("is-ready");
 
             const bubble = item.querySelector(".bubble-reveal-bubble");
@@ -74,6 +73,7 @@ function initBubbleReveal(el, userOptions) {
         items.forEach((item, i) => {
             const bubble = item.querySelector(".bubble-reveal-bubble");
             const tz = randInt(opt.translateZ.min, opt.translateZ.max);
+            const isLast = i === items.length - 1;
 
             if (bubble) {
                 gsap.fromTo(
@@ -85,6 +85,9 @@ function initBubbleReveal(el, userOptions) {
                         duration: opt.duration,
                         delay: i * opt.staggerDelay,
                         ease: opt.ease,
+                        onComplete: () => {
+                            if (isLast) active = false;
+                        },
                     }
                 );
             }
@@ -103,8 +106,13 @@ function initBubbleReveal(el, userOptions) {
     }
 
     function changeImg(src) {
+        if (src === imgSrc) return;
+
         imgSrc = src;
         if (bg) bg.style.backgroundImage = `url(${imgSrc})`;
+
+        // 버블을 즉시(트랜지션 없이) 숨김 상태로 되돌리고,
+        // 새 이미지를 채운 뒤 처음 로드 때와 같은 reveal 애니메이션을 재생한다.
         reset();
         setup(imgSrc);
         animate();
@@ -147,8 +155,8 @@ function initBubbleReveal(el, userOptions) {
         if (active) animate();
     }, 200));
 
-    // DOMContentLoaded 시점에는 clip-path 등 "숨김 상태"만 미리 세팅해둔다.
-    // 실제 reveal 애니메이션(animate)은 이미지 로딩이 끝난 뒤 별도로 호출한다.
+    // 초기 세팅: 클립 상태만 먼저 잡아둔다.
+    // 실제 첫 reveal(animate)은 이미지 로딩 완료 후(window load) 별도로 호출한다.
     setup();
 
     return {animate, reset, changeImg};
@@ -158,7 +166,7 @@ function initBubbleReveal(el, userOptions) {
 // 초기화 타이밍 분리
 // - DOMContentLoaded: HTML 파싱 완료 즉시 실행 → setup()으로 클립 상태를
 //   미리 적용해서, 사용자가 원본 이미지를 볼 틈이 없게 만든다.
-// - load: 이미지 등 모든 리소스가 로드된 후 실행 → 이 시점에만 실제
+// - load: 이미지 등 모든 리소스가 로드된 후 실행 → 이 시점에만 최초
 //   reveal(animate) 애니메이션을 재생한다.
 // ------------------------------------------------------------
 let bubbleInstance = null;
