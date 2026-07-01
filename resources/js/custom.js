@@ -54,6 +54,8 @@ function initBubbleReveal(el, userOptions) {
             item.dataset.cy = cy;
             item.dataset.r = r;
             item.style.filter = "drop-shadow(0 20px 30px rgba(0,0,0,0.4))";
+            // clip-path 등 초기 상태가 다 세팅된 뒤에만 보이도록 표시
+            item.classList.add("is-ready");
 
             const bubble = item.querySelector(".bubble-reveal-bubble");
             if (bubble) {
@@ -145,12 +147,28 @@ function initBubbleReveal(el, userOptions) {
         if (active) animate();
     }, 200));
 
+    // DOMContentLoaded 시점에는 clip-path 등 "숨김 상태"만 미리 세팅해둔다.
+    // 실제 reveal 애니메이션(animate)은 이미지 로딩이 끝난 뒤 별도로 호출한다.
     setup();
-    animate();
 
     return {animate, reset, changeImg};
 }
 
+// ------------------------------------------------------------
+// 초기화 타이밍 분리
+// - DOMContentLoaded: HTML 파싱 완료 즉시 실행 → setup()으로 클립 상태를
+//   미리 적용해서, 사용자가 원본 이미지를 볼 틈이 없게 만든다.
+// - load: 이미지 등 모든 리소스가 로드된 후 실행 → 이 시점에만 실제
+//   reveal(animate) 애니메이션을 재생한다.
+// ------------------------------------------------------------
+let bubbleInstance = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const el = document.querySelector(".bubble-reveal");
+    if (!el) return;
+    bubbleInstance = initBubbleReveal(el);
+});
+
 window.addEventListener("load", () => {
-    initBubbleReveal(document.querySelector(".bubble-reveal"));
+    if (bubbleInstance) bubbleInstance.animate();
 });

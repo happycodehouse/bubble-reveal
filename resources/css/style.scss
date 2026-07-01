@@ -26,8 +26,14 @@
         height: 100%;
         top: 0;
         left: 0;
-    }
+        opacity: 0;
+        visibility: hidden;
 
+        &.is-ready {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 
     &-bubble {
         position: absolute;
@@ -35,6 +41,7 @@
         height: 100%;
         top: 0;
         left: 0;
+        transform: scale(0);
         will-change: transform;
     }
 
